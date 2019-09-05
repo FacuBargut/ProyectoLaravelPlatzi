@@ -26,7 +26,7 @@ class ExpenseController extends Controller
     {
         return view ('expense.create',[
             'report' => $expenseReport
-            echo "hola"
+            
         ]);
     }
 
