@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ExpenseReport;
+use App\Expense;
 
 class ExpenseController extends Controller
 {
@@ -36,9 +37,15 @@ class ExpenseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        dd($request->all());
+    public function store(Request $request, ExpenseReport $expenseReport)
+    {   
+        $expense = new Expense();
+        $expense->description = $request->get('description');
+        $expense->amount = $request->get('amount');
+        $expense->expense_report_id = $expenseReport->id;
+        $expense->save();
+        
+        return redirect('/expense_reports/'.$expenseReport->id);
     }
 
     /**
